@@ -19,7 +19,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/home_style2.css">
 </head>
-<body>
+<body  style="background-image: url('images/bb3.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
+
 	<div class="row">
 		<div class="col-sm-12">
 			<center><h2>Your Latest Posts</h2></center>

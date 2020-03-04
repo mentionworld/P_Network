@@ -24,11 +24,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="style/home_style2.css">
-</head>
-<body>
+<link rel="stylesheet" type="text/css" href="style/home_style2.css">
+<body  style="background-image: url('images/bb3.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
+	<!--<body style="background-color: #cccccc;">-->
 	<div class="row">
-		<div id="insert_post" class="col-sm-12">
+		<div id="insert_post" class="col-sm-12" style="background-color: #aec9dc">
 			<center>
 				<form action="home.php?id=<?php echo $user_id;?>" method="post" id="f" enctype="multipart/form-data">
 					<textarea class="form-control" id="content" row="4" name="content" placeholder="What's in your  mind?"></textarea><br>
@@ -45,7 +45,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<center><h2><strong>News Feed</strong></h2><br></center>
+			<center><h2><strong>New Feed</strong></h2><br></center>
 			<?php  echo get_posts();?>
 		</div>
 	</div>

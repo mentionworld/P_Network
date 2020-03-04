@@ -67,7 +67,7 @@
 
 
 </style>
-<body>
+<body  style="background-image: url('images/bb3.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
 	<div class="row">
 		<?php
 			if(isset($_GET['u_id']))
@@ -97,30 +97,53 @@
 		?>
 		<div class="col-sm-3" id="select_user">
 			<?php
-				$user="select * from users";
+				global $con;
+
+				$user=$_SESSION['user_email'];
+			$get_user="select * from users where user_email='$user'";
+			$run_user=mysqli_query($con,$get_user);
+			$row=mysqli_fetch_array($run_user);
+
+			$id=$row['user_id'];
+
+				$user="select * from friend where user_from='$id' OR user_to='$id'";
 				$run_user=mysqli_query($con,$user);
 
 				while($row_user=mysqli_fetch_array($run_user))
 				{
-					$user_id=$row_user['user_id'];
-					$user_name=$row_user['user_name'];
-					$f_name=$row_user['f_name'];
-					$l_name=$row_user['l_name'];
-					$user_image=$row_user['user_image'];
+					$user_id=$row_user['user_to'];
+					$user_from=$row_user['user_from'];
+					$status=$row_user['status'];
 
 
-					echo
-					"
-						<div class='container-fluid'>
-							<a  style='text-decoration: none;cursor: pointer;color: #3897f0;'  href='message.php?u_id=$user_id'>
-								<img  class='img-circle' src='users/$user_image' width='90px' height='80px' title='$user_name'>
-								<strong>&nbsp $f_name  $l_name</strong><br><br>
-							</a>
-						</div>
-					";
 
-				}
+					$frd="select * from users where user_id='$user_id'";
+					$run_frd=mysqli_query($con,$frd);
+					while($row_frd=mysqli_fetch_array($run_frd))
+					{
+							$user_name=$row_frd['user_name'];
+							$f_name=$row_frd['f_name'];
+							$l_name=$row_frd['l_name'];
+							$user_image=$row_frd['user_image'];
+
+							if($status==2 && $id!=$user_id)
+							{
+							echo
+							"
+								<div class='container-fluid'>
+									<a  style='text-decoration: none;cursor: pointer;color: #3897f0;'  href='message.php?u_id=$user_id'>
+										<img  class='img-circle' src='users/$user_image' width='90px' height='80px' title='$user_name'>
+										<strong>&nbsp $f_name  $l_name</strong><br><br>
+									</a>
+								</div>
+							";
+
+							}
+							
+						}
+					}
 			?>
+			
 		</div>
 		<div class="col-sm-6">
 			<div class="load_msg" id="scroll_messages">
@@ -156,6 +179,7 @@
 												$msg_body;
 											</div><br><br><br>
 										";
+										
 									}
 								?>
 							</p>
@@ -177,6 +201,7 @@
 								<center><h3>Select someone to start conversation</h3></center>
 								<textarea disabled class="form-control" placeholder="Enter your Message"></textarea>
 								<input type="submit" class="btn btn-default" disabled value="Send">
+
 							</form><br><br>
 
 
@@ -191,9 +216,11 @@
 								<input type="submit" name="send_msg" id="btn-msg"  value="Send">
 							</form><br><br>
 						';
+						
 					}
 				}
 			?>
+			
 			<?php
 				if(isset($_POST['send_msg']))
 				{
@@ -217,6 +244,10 @@
 					{
 						$insert ="insert into user_messages(user_to,user_from,msg_body,date,msg_seen) values('$user_to_msg','$user_from_msg','$msg',NOW(),'no')";
 						$run_insert=mysqli_query($con,$insert);
+						if($run_insert)
+						{		
+							echo "<script>window.open('message.php?u_id=$u_id','_self');</script>";
+						}
 					}
 
 				}
@@ -261,7 +292,7 @@
 						<center>
 							<div style='background-color: #e6e6e6; ' class='col-sm-9'>
 								<h2>Information About</h2>
-								<img  class='img-circle' src='users/$user_image' height='150px' width='150'><br><br>
+								<img  class='img-circle' src='users/$image' height='150px' width='150'><br><br>
 								<ul class='list-group'>
 									<li class='list-group-item' title='Username'><strong>$f_name $l_name</strong></li>
 									<li class='list-group-item' title='User Status'><strong style='color: grey;'>$describe_user</strong></li>

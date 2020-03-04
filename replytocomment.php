@@ -19,12 +19,11 @@
   <link rel="stylesheet" type="text/css" href="style/home_style2.css">
 </head>
 <body  style="background-image: url('images/bb3.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
-
 	<div class="row">
 		<div class="col-sm-12">
-			<center><h2>Comments</h2><br></center>
+			<center><h2>Reply</h2><br></center>
 			<?php
-				single_post();
+				reply_comment();
 			?>
 		</div>
 	</div>

@@ -64,7 +64,7 @@
 		background-color: #187FAB;
 	}
 </style>
-<body>
+<body img src="images/background.jpg" >
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="well">
@@ -76,7 +76,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-6" style="left: 0.5%">
-			<img src="images/book1.jpg" class="img-rounded" title="mention world" width="650px" height="565px">
+			<img src="images/background.jpg" class="img-rounded" title="mention world" width="650px" height="565px">
 			<div id="centered1" class="centered"><h3 style="color: white;"><span class="glyphicon glyphicon-search"></span>&nbsp&nbsp<strong> Follow your interest.</strong></h3>
 			</div>
 			<div id="centered2" class="centered"><h3 style="color: white;"><span class="glyphicon glyphicon-search"></span>&nbsp&nbsp<strong> what people talking about.</strong></h3>

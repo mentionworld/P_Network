@@ -18,12 +18,58 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/home_style2.css">
+
+
+	<script type="text/javascript">
+	function validate1()
+	{
+		
+		var n1=document.myform.fn.value;
+		var n2=document.myform.ln.value;
+		var n3=document.myform.e.value;
+		//var n4=document.myform.fn.value;
+		//var n5=document.myform.fn.value;
+		//var n6=document.myform.fn.value;
+
+		alert("name"+n1+"lname"+n2);
+
+		if(!isNaN(n1))
+		{
+			alert(" fisrt name must be String");
+			document.getElementById('fn').focus();
+			return false;
+		}
+		
+	
+		 if(!isNaN(n2))
+		{
+			alert(" last name must be String");
+			document.getElementById('ln').focus();
+			return false;
+		}
+			
+		
+	if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(n3))
+	{
+		return true;
+	}	
+	else
+	{
+	alert("please enter valid email");
+	document.getElementById('e').focus();
+	return false
+	}
+	}
+
+</script>
+
 </head>
-<body>
+<body  style="background-image: url('images/bb3.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
+
 	<div class="row">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
-			<form action="" method="post" enctype="multipart/form-data">
+			<form action="" method="post" enctype="multipart/form-data" onsubmit="return validate1()">
 				<table class="table table-bordered table-hover">
 					<tr align="center"> 
 						<td colspan="6" class="active"><h2>Edit Your Profile</h2></td>
@@ -31,13 +77,13 @@
 					<tr>
 						<td style="font-weight: bold;">Change Your Firstname</td>
 						<td>
-							<input  class="form-control" type="text" name="f_name" required value="<?php echo $first_name;?>">
+							<input  class="form-control" type="text"  id="fn" name="f_name" required value="<?php echo $first_name;?>">
 						</td>
 					</tr>
 					<tr>
 						<td style="font-weight: bold;">Change Your Lastname</td>
 						<td>
-							<input  class="form-control" type="text" name="l_name" required value="<?php echo $last_name;?>">
+							<input  class="form-control" type="text" id="ln" name="l_name" required value="<?php echo $last_name;?>">
 						</td>
 					</tr>
 					<tr>
@@ -92,6 +138,8 @@
 								<option>CANADA</option>
 								<option>RUSSIA</option>
 								<option>SPAN</option>
+								<option>INDIA</option>
+								<option>NEPAL</option>
 							</select>
 						</td>
 					</tr>
@@ -123,19 +171,30 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Model Header</h4>
+											
 										</div>
 										<div class="modal-body">
 											<form action="recovery.php?id=<?php echo $user_id;?>" method="post" id="f">
-												<strong>What is Your Best Friend Name?</strong>
-												<textarea class="form-control" cols="83" rows="4" name="content" placeholder="Someone"></textarea><br>
-												<input class="btn btn-default" type="submit" name="sub" value="Submit" style="width: 100px;"><br><br>
-												<pre>Answer the above question we will ask this question is you forgot your <br>password.</pre><br><br>
+												<div class="input-group">
+													<span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+													<select class="form-control" name="r_Question" required="required">
+														<option value="A">What is your best friend name?</option>
+														<option value="B"> Who is your loved one?</option>
+														<option value="C"> Where  is your favourite Destination?</option>
+													</select>
+												</div><br>
+												<div class="input-group">
+													<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+													<input  id="msg"  type="text" class="form-control" placeholder="Someone" name="recovery_account" >
+												</div>
+												<input class="btn btn-info" type="submit" name="sub" value="Submit" style="width: 10%;
+		                                              border-radius: 30px;"><br><br>
 											</form>
 											<?php
 												if(isset($_POST['sub']))
 												{
-													$bfn=htmlentities($_POST['content']);
+													$bfn=htmlentities($_POST['recovery_account']);
+													$qts=htmlentities($_POST['r_Question']);
 
 													if($bfn=="")
 													{
@@ -145,7 +204,7 @@
 													}
 													else
 													{
-														$update="update users set recovery_account='$bfn' where user_id='$user_id'";
+														$update="update users set recovery_account='$bfn', recovey_Q='$qts' where user_id='$user_id'";
 														$run=mysqli_query($con,$update);
 
 														if($run)
@@ -172,7 +231,7 @@
 					</tr>
 					<tr align="center">
 						<td colspan="6">
-							<input  type="submit" class="btn btn-info" name="update" style="width: 250px;" value="Update">
+							<input  type="submit" class="btn btn-info" name="update" style="width: 250px;border-radius: 30px;" value="Update">
 						</td>
 					</tr>
 				</table>
@@ -206,6 +265,10 @@
 		{
 			echo"<script>alert('Your Profile  Updated')</script>";
 			echo"<script>window.open('edit_profile.php?u_id=$user_id','_self')</script>";
+		}
+		else
+		{
+			echo"<script>alert('..................................................die')</script>";
 		}
 
 	}

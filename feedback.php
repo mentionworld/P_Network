@@ -19,12 +19,19 @@
   <link rel="stylesheet" type="text/css" href="style/home_style2.css">
 </head>
 <body  style="background-image: url('images/bb3.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
-
 	<div class="row">
 		<div class="col-sm-12">
-			<center><h2>Comments</h2><br></center>
+			<center><h2>Feedback</h2><br></center>
 			<?php
-				single_post();
+				feedback_admin();
+			?>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<center><h2> Your Past Given Feedback</h2><br></center>
+			<?php
+				include("function/user_fdbk.php");
 			?>
 		</div>
 	</div>

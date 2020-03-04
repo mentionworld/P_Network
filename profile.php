@@ -34,16 +34,16 @@ include("include/header.php");
 	#profile-img
 	{
 		position: absolute;
-		top:190px;
+		top:200px;
 		left:40Px;
 		
 	}
 	#update_profile
 	{
 		position: relative;
-		top: -33px;
+		top: -20px;
 		cursor: pointer;
-		left: 70px;
+		left: 85px;
 		border-radius: 4px;
 		background-color: rgba(0,0,0,0.1);
 		transform: translate(-50%,-50%);
@@ -51,7 +51,7 @@ include("include/header.php");
 	#button_profile
 	{
 		position: absolute;
-		top: 82%;
+		top: 70%;
 		left: 50%;
 		cursor: pointer;
 		transform: translate(-50%,-50%);
@@ -68,7 +68,7 @@ include("include/header.php");
 	}
 
 </style>
-<body>
+<body  style="background-image: url('images/bb3.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
 	<div class="row">
 		<div class="col-sm-2">
 			
@@ -99,8 +99,8 @@ include("include/header.php");
 					<div id='profile-img'>
 						<img src='users/$user_image' alt='profile' class='img-circle' width='180px'height='185px'>
 							<form action='profile.php?u_id='$user_id' method='post' enctype='multipart/form-data'>
-								<lable id='update_profile'>select Profile
-								       <input type='file' name='u_image' size='60'/></lable><br><br>
+								<label id='update_profile'>select Profile
+								       <input type='file' name='u_image' size='60'/></label><br><br>
 										<button id='button_profile' name='update' class ='btn btn-info'>Update Profile</button><br><br>
 							</form>
 					</div>
@@ -196,7 +196,7 @@ include("include/header.php");
 				{
 					$uu_id=$_GET['u_id'];
 				}
-				$get_posts="select * from posts where user_id='$uu_id' ORDER by 1 DESC LIMIT 5";
+				$get_posts="select * from posts where user_id='$uu_id' ORDER by 1 DESC ";
 				$run_posts=mysqli_query($con,$get_posts);
 				while($row_posts=mysqli_fetch_array($run_posts))
 				{
@@ -219,15 +219,15 @@ include("include/header.php");
 					if($content=='No' && strlen($upload_image)>=1)
 					{
 						echo "
-							<div id='own_post'>
+							<div id='own_post' style='background-color:#dbe6f4;'>
 								<div class='row'>
 									<div class='col-sm-2'>
 										<p><img src='users/$user_image' class='img-circle' width='100px' height='100px'></p>
 									</div>
 									<div class='col-sm-6'>
-										<h3><a style='text-decoration:none; cursor:pointer; color:#3897f0;' href='user_profile.php?u_id=$user_id'>$user_name</a></h3>
+										<h3><a style='text-decoration:none; cursor:pointer; color:#3897f0;' href='user_profile.php?u_id=$user_id'>&nbsp&nbsp&nbsp$user_name</a></h3>
 
-									<h4><small style='color:black;'> Updated a post on<strong>$post_date</strong> </small></h4>
+									<h4><small style='color:black;'>&nbsp&nbsp &nbspUpdated a post on<strong>$post_date</strong> </small></h4>
 									</div>
 									<div class='col-sm-4'>
 
@@ -239,7 +239,7 @@ include("include/header.php");
 									</div>
 								</div><br>
 								<a href='single.php?post_id=$post_id' style='float:right;'><button class='btn btn-success'>View</button></a>
-
+									<a href='edit_post.php?post_id=$post_id' style='float:right;'><button class='btn btn-info'>Edit</button></a>
 								<a href='function/delete_post.php?post_id=$post_id' style='float:right;'><button class='btn btn-danger'>Delete</button></a>
 							</div><br><br>
 						";
@@ -247,15 +247,15 @@ include("include/header.php");
 					else if( strlen($content)>=1  &&  strlen($upload_image)>=1)
 					{
 						echo "
-							<div id='own_post'>
-								<div class='row'>
+							<div id='own_post' style='background-color:#dbe6f4;'>
+								<div class='row' >
 									<div class='col-sm-2'>
 										<p><img src='users/$user_image' class='img-circle' width='100px' height='100px'></p>
 									</div>
 									<div class='col-sm-6'>
-										<h3><a style='text-decoration:none; cursor:pointer; color:#3897f0;' href='user_profile.php?u_id=$user_id'>$user_name</a></h3>
+										<h3><a style='text-decoration:none; cursor:pointer; color:#3897f0;' href='user_profile.php?u_id=$user_id'>&nbsp&nbsp&nbsp$user_name</a></h3>
 
-									<h4><small style='color:black;'> Updated a post on<strong>$post_date</strong> </small></h4>
+									<h4><small style='color:black;'>&nbsp&nbspUpdated a post on<strong>$post_date</strong> </small></h4>
 									</div>
 									<div class='col-sm-4'>
 
@@ -268,7 +268,7 @@ include("include/header.php");
 									</div>
 								</div><br>
 								<a href='single.php?post_id=$post_id' style='float:right;'><button class='btn btn-success'>View</button></a>
-
+								<a href='edit_post.php?post_id=$post_id' style='float:right;'><button class='btn btn-info'>Edit</button></a>
 								<a href='function/delete_post.php?post_id=$post_id' style='float:right;'><button class='btn btn-danger'>Delete</button></a>
 							</div><br><br>
 						";
@@ -276,15 +276,15 @@ include("include/header.php");
 					else
 					{
 						echo "
-							<div id='own_post'>
+							<div id='own_post' style='background-color:#dbe6f4;'>
 								<div class='row'>
 									<div class='col-sm-2'>
 										<p><img src='users/$user_image' class='img-circle' width='100px' height='100px'></p>
 									</div>
 									<div class='col-sm-6'>
-										<h3><a style='text-decoration:none; cursor:pointer; color:#3897f0;' href='user_profile.php?u_id=$user_id'>$user_name</a></h3>
+										<h3><a style='text-decoration:none; cursor:pointer; color:#3897f0;' href='user_profile.php?u_id=$user_id'>&nbsp&nbsp&nbsp$user_name</a></h3>
 
-									<h4><small style='color:black;'> Updated a post on<strong>$post_date</strong> </small></h4>
+									<h4><small style='color:black;'>&nbsp&nbsp&nbsp Updated a post on<strong>$post_date</strong> </small></h4>
 									</div>
 									<div class='col-sm-4'>
 

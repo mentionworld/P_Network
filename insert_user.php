@@ -10,6 +10,10 @@ include ("include/connection.php");
 		$country=htmlentities(mysqli_real_escape_string($con,$_POST['u_country']));
 		$gender=htmlentities(mysqli_real_escape_string($con,$_POST['u_gender']));
 		$birthday=htmlentities(mysqli_real_escape_string($con,$_POST['u_birthday']));
+
+		$r_ans=htmlentities(mysqli_real_escape_string($con,$_POST['r_answer']));
+		$r_question=htmlentities(mysqli_real_escape_string($con,$_POST['r_Question']));
+
 		$status="varified";
 		$posts="no";
 		$newgid=sprintf('%05d',rand(0,9999999));
@@ -44,8 +48,8 @@ include ("include/connection.php");
 
 		
 
-		$insert="INSERT INTO   users (f_name,l_name,user_name,describe_user,Relationship,user_pass,user_email,user_country,user_gender,user_birthday,user_image,user_cover,user_reg_date,status,posts,recovery_account)
-		 VALUES('$first_name','$last_name','$username','Hello mention world . this is my default status!','...','$pass','$email','$country','$gender','$birthday','$profile_pic','c2.jpg',NOW(),'$status','$posts','Iwanttoputadingintheuniverse.');";
+/*		$insert="INSERT INTO   users (f_name,l_name,user_name,describe_user,Relationship,user_pass,user_email,user_country,user_gender,user_birthday,user_image,user_cover,user_reg_date,status,posts,recovery_account,recovey_Q)
+		 VALUES('$first_name','$last_name','$username','Hello mention world . this is my default status!','...','$pass','$email','$country','$gender','$birthday','$profile_pic','c2.jpg',NOW(),'$status','$posts','$r_ans','$r_question');";
 		$query=mysqli_query($con,$insert);
 	if ($query)
 		{
@@ -56,6 +60,6 @@ include ("include/connection.php");
 		{
 			echo "<script>alert('Registration failed, Please try again! ')</script>";
 			echo "<script>window.open('signup.php','_self'</script>";
-		}
+		}*/
 	 }
 ?>

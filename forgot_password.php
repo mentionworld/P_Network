@@ -57,10 +57,20 @@
 					<form action="" method="post">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-							<input type="email" name="email"  class="form-control" placeholder="Enter your Email" required>
+							<input id="email" type="email" name="email"  class="form-control" placeholder="Enter your Email" required>
 						</div><br>
-						<hr>
-						<pre class="text">Enter your Bestfreind name down below?</pre>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+							<select class="form-control" name="r_Question" required="required">
+								<option value="A">What is your best friend name?</option>
+								<option value="B"> Who is your loved one?</option>
+								<option value="C"> Where  is your favourite Destination?</option>
+								<!--<option> USA</option>
+								<option> UK</option>
+								<option> France</option>
+								<option> Germany</option>-->
+							</select>
+						</div><br>
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
 							<input  id="msg"  type="text" class="form-control" placeholder="Someone" name="recovery_account"  required>
@@ -84,8 +94,9 @@ include ("include/connection.php");
 		$email = htmlentities(mysqli_real_escape_string($con,$_POST['email']));
 
 		$recovery_account= htmlentities(mysqli_real_escape_string($con,$_POST['recovery_account']));
+		$r_question=htmlentities(mysqli_real_escape_string($con,$_POST['r_Question']));
 
-		$select_user = "select * from users where user_email='$email' AND recovery_account='$recovery_account'";
+		$select_user = "select * from users where user_email='$email' AND recovery_account='$recovery_account' AND recovey_Q='$r_question'";
 		$query = mysqli_query($con,$select_user);
 		$check_user = mysqli_num_rows($query);
 
@@ -96,7 +107,7 @@ include ("include/connection.php");
 		}
 		else
 		{
-			echo"<script>alert('Your Email or BestFriend name is incorrect')</script>";
+			echo"<script>alert('Something is incorrect')</script>";
 		}
 		
 	}

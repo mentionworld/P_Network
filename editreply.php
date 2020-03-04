@@ -18,74 +18,79 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/home_style2.css">
 </head>
-<body>
+<body  style="background-image: url('images/bb3.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
+
 	<div class="row">
 		<div class="col-sm-3">
 		</div>
 				
 		<div class="col-sm-6">
 			<?php
-				if (isset($_GET['post_id'])) 
+				if (isset($_GET['reply_id'])) 
 				{
-					$get_id=$_GET['post_id'];
+					$get_id=$_GET['reply_id'];
 					
 
-					$get_post="select * from posts where post_id='$get_id'";
-					$run_post = mysqli_query($con,$get_post);
-
-					$row=mysqli_fetch_array($run_post);	
-					$post_con=$row['post_content'];	
-
-				}
-				if (isset($_GET['fd_id'])) 
-				{
-					$fd=$_GET['fd_id'];
-					
-					echo"..................hello =$fd";
-					$get_post="select * from feedback where fd_id='$fd'";
+					$get_post="select * from reply where reply_id='$get_id'";
 					$run_post = mysqli_query($con,$get_post);
 
 
 					$row=mysqli_fetch_array($run_post);	
-					$post_con=$row['feedback'];
-					$com_id=$row['fd_id'];	
+					$post_con=$row['reply'];
+					$com_id=$row['comm_id'];
+
 
 				}
+				if (isset($_GET['com_id'])) 
+				{
+					$get=$_GET['com_id'];
+					
 
-			
+					$get_post="select * from comments where com_id='$get'";
+					$run_post = mysqli_query($con,$get_post);
+
+
+					$row=mysqli_fetch_array($run_post);	
+					$post_con=$row['comment'];
+					$com_id=$row['post_id'];	
+
+				}
+				
+		
 			?>
 			<form action="" method="post" id="f">
-				<center><h2>Edit Your Post</h2></center><br>
+				<center><h2>Edit Your comment</h2></center><br>
 				<textarea class="form-control" cols="83" rows="4" name="content"><?php echo $post_con;?></textarea><br>
 				<input type="submit" name="update" value="Update Post" class="btn btn-info">
 			</form>
 			<?php
 				if(isset($_POST['update']))
-				{	
+				{
 					$content=$_POST['content'];
-
-					if($get_id=="")
+					if($get=="")
 					{
-						echo"........................geueufendfkj";
-						$update_post="update feedback set feedback='$content' where fd_id='$fd'";
+						$update_post="update reply set reply='$content' where reply_id='$get_id'";
 						$run_update=mysqli_query($con,$update_post);
+
 						if($run_update)
 						{
-							echo "<script>alert('A feedback have been Updated!')</script>";
-							echo "<script> window.open('home.php','_self')</script>";
+							echo "<script>alert('A Reply have been Updated!')</script>";
+							echo "<script> window.open('replytocomment.php?com_id=$com_id','_self')</script>";
 						}
 					}
+				
 					else
 					{
-						$update_post="update posts set post_content='$content' where post_id='$get_id'";
-						$run_update=mysqli_query($con,$update_post);
+						$update_post="update comments set comment='$content' where com_id='$get'";
+						$run_update=mysqli_query($con,$update_post);	
+				
 						if($run_update)
 						{
-							echo "<script>alert('A Post have been Updated!')</script>";
-							echo "<script> window.open('home.php','_self')</script>";
+							echo "<script>alert('A comment have been Updated!')</script>";
+							echo "<script> window.open('single.php?post_id=$com_id','_self')</script>";
 						}
 					}
-				}
+			}
 			?>
 		</div>
 		<div class="col-sm-3">

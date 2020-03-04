@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <?php
  session_start();
- include("include/header.php");
+ include("include/a_header.php");
 
-	if(!isset($_SESSION['user_email']))
+	if(!isset($_SESSION['admin_email']))
 	{
 		header("location:index.php");
 	}
@@ -62,38 +62,24 @@ form.search_form::after
 	display: table;
 }
 </style>
-<body  style="background-image: url('images/bb3.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
+<body  style="background-image: url('images/bb22.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
+
 	<div class="row">
 		<div class="col-sm-2">
 			
 		</div>
 		<div class="col-sm-4">
 			
-					
-			<a href='add_friend.php'><button class="btn btn-info" type="submit" name="search_user_btn">Friends<span class='badge badge-secondary'><?php
-			if(isset($_GET['u_id']))
-			{
-				$user_id=$_GET['u_id'];
-			}
-
-				$user_posts="SELECT * from friend where user_from='$user_id'";
-					$run_posts =mysqli_query($con,$user_posts);
-					$posts=mysqli_num_rows($run_posts);
-
-				//echo $posts;
-			?> </span></button></a>
-		
-				
 				</div>
 		<div class="col-sm-12">
-			<center><h2>Find New People</h2></center><br><br>
+			<center><h2>users</h2></center><br><br>
 			<div class="row">
 				<div class="col-sm-4">
 					
 				</div>
 				<div class="col-sm-4">
 					<form class="search_form" action="">
-						<input type="text"  placeholder="Search Friend" name="search_user">
+						<input type="text"  placeholder="get users  by name" name="search_user">
 						<button class="btn btn-info" type="submit" name="search_user_btn">Search</button>
 					</form>
 				</div>
@@ -102,7 +88,7 @@ form.search_form::after
 				</div>
 			</div><br><br>
 			<?php 
-			search_user();
+			search_a_user();
 			?>
 		</div>	
 	</div>

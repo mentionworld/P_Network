@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <?php
  session_start();
- include("include/header.php");
+// include("include/header.php");
 
-	if(!isset($_SESSION['user_email']))
+	if(!isset($_SESSION['user_email']) && !isset($_SESSION['admin_email']))
 	{
 		header("location:index.php");
+	}
+	if(isset($_SESSION['user_email']))
+	{
+		 include("include/header.php");
+	}
+	else{
+		 include("include/a_header.php");
 	}
 ?>
 <html>
@@ -167,9 +174,9 @@
 											<img  id='posts-img'  src='imagepost/$upload_image' style='height: 350px'>
 										</div>
 									</div><br>
-									<a href='single.php?post_id=$post_id' style='float:right;'><button class='btn btn-success'>View</button></a>
+									<a href='single.php?post_id=$post_id' style='float:right;'><button class='btn btn-success'>comment</button></a>
 
-								   <a href='function/delete_post.php?post_id=$post_id' style='float:right;'><button class='btn btn-danger'>Delete</button></a>
+								  
 								</div><br><br>
 
 							";
@@ -197,9 +204,9 @@
 										<img id='posts-img' src='imagepost/$upload_image' style='height:350px;'>
 										</div>
 									</div><br>
-									<a href='single.php?post_id=$post_id' style='float:right;'><button class='btn btn-success'>View</button></a>
+									<a href='single.php?post_id=$post_id' style='float: right;'><button class='btn btn-info'>Comment</button></a>
 	
-									<a href='function/delete_post.php?post_id=$post_id' style='float:right;'><button class='btn btn-danger'>Delete</button></a>
+									
 								</div><br><br>
 							";
 						}
